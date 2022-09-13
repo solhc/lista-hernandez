@@ -1,5 +1,5 @@
-import { AddTask, CustomFlatList, CustomModal, RenderItem } from './components/index';
-import { Button, StyleSheet, Text, View, renderItem } from 'react-native';
+import { AddTask, CustomModal } from './components/index';
+import { Button, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React, { useState } from 'react';
 
 const styles = StyleSheet.create({
@@ -7,7 +7,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#ffffff',
   },
-
+  itemList: {
+    flex: 1,
+    marginVertical: 20,
+    marginHorizontal: 20,
+  },
   itemContainer: {
     flex: 1,
     marginVertical: 5,
@@ -81,8 +85,6 @@ export default function App() {
     ]);
     setTask('');
   }
-  
-  
 
   const onHandleModal = (id) => {
     setModalVisible(!modalVisible);
@@ -90,29 +92,20 @@ export default function App() {
     console.warn(id);
   }
 
-  /*const renderItem = ({ item }) => (
+  const renderItem = ({ item }) => (
     <View style={styles.itemContainer}>
       <Text style={styles.item}>{item.value}</Text>
       <TouchableOpacity style={styles.button} onPress={() => onHandleModal(item.id)}>
         <Text style={styles.delete}>X</Text>
       </TouchableOpacity>
     </View>
-  ) */
-
-  const renderItem = ({item}) => (
-    <RenderItem
-      key={item.id}
-      item={item}
-      onPress={() => onHandleModal(item.id)}
-    />
-  );
+  )
 
   const onHandleDeleteItem = (id) => {
     setTasks(tasks.filter((item) => item.id !== id));
     setSelectedTask(null);
     setModalVisible(!modalVisible);
   }
-  console.warn("Tarea", task);
 
   return (
     <View style={styles.container}>
@@ -127,11 +120,12 @@ export default function App() {
         color='#4A306D'
       
       />
-      <CustomFlatList
-         data={tasks}
-         renderItem={renderItem}
-         keyExtractor={(item) => item.id.toString()}
-         showsVerticalScrollIndicator={false}
+      <FlatList
+        style={styles.itemList}
+        data={tasks}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id.toString()}
+        showsVerticalScrollIndicator={false}
       />
       <CustomModal animationType='slide' visible={modalVisible}>
         <View style={styles.modalContainer}>
