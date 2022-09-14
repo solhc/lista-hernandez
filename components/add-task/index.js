@@ -1,27 +1,17 @@
-import { Button, TextInput, View } from "react-native";
+import {Button, TextInput, View} from 'react-native';
 
 import React from "react";
-import { styles } from "./styles"
+import { styles } from './styles';
 
-const AddTask = ( { item, onChangeText, placeholder, addItem, selectionColor, placeholderTextColor, textButton, color } ) =>{
+const AddTask = ({item, onChangeText, placeholder, addItem, textButton, color}) => {
+    
     return(
         <View style={styles.inputContainer}>
-            <TextInput 
-                placeholder={placeholder}
-                style={styles.input}
-                
-                selectionColor={selectionColor}
-                placeholderTextColor={placeholderTextColor}
-                onChangeText={onChangeText}
-                value={item}
-            />
-            <Button
-                title={textButton} 
-                onPress={addItem} 
-                color={color}
-            />
+        <TextInput placeholder={placeholder} style={styles.input} onChangeText={onChangeText} value={item}/>
+        <Button title={textButton} color={color} onPress={addItem} />
       </View>
     )
-}
+   
+  }
 
-export default AddTask;
+  export default AddTask

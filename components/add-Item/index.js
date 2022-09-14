@@ -1,19 +1,17 @@
-import { Text, TouchableOpacity, View } from "react-native";
+import {Text, TouchableOpacity, View} from 'react-native'
 
-import React from "react";
-import { styles } from "./styles";
+import React from 'react'
+import { styles } from './styles'
 
-const RenderItem = ({ item, onPress }) => {
-
-  return (  
-    <View style={styles.itemContainer}>
-        <Text>{item.id}</Text>
-      <Text style={styles.item}>{item.value}</Text>
-      <TouchableOpacity style={styles.button} onPress={onPress}>
-        <Text style={styles.delete}>X</Text>
-      </TouchableOpacity>
-    </View>
-  )
+const RenderItem = ({onPress, item})=>{
+    return (
+        <View style= {styles.itemListContainer}>
+            <Text style={styles.item}>{item.value}</Text>
+            <TouchableOpacity  onPress={onPress}>
+            <Text style={styles.delete}>X</Text>
+            </TouchableOpacity>
+        </View>
+    )
 }
 
-export default RenderItem;
+export default RenderItem

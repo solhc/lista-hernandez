@@ -38,7 +38,29 @@ const styles = StyleSheet.create({
     backgroundColor: '#4A306D',
     padding: 10,
     borderRadius: 10,
+  },
+  itemContainer: {
+    flex: 1,
+    marginVertical: 5,
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: 10,
+    backgroundColor: '#9F84BD',
+    paddingHorizontal: 10,
+    paddingVertical: 20,
+    borderRadius: 5,
+  },
+  item: {
+    fontSize: 16,
+    color: '#000000',
+  },
+  delete: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#ffffff'
   }
+
 });
 
 
@@ -68,29 +90,17 @@ export default function App() {
     console.warn(id);
   }
 
-  /*const renderItem = ({ item }) => (
-    <View style={styles.itemContainer}>
-      <Text style={styles.item}>{item.value}</Text>
-      <TouchableOpacity style={styles.button} onPress={() => onHandleModal(item.id)}>
-        <Text style={styles.delete}>X</Text>
-      </TouchableOpacity>
-    </View>
-  ) */
-
+ 
   const renderItem = ({item}) => (
-    <RenderItem
-      key={item.id}
-      item={item}
-      onPress={() => onHandleModal(item.id)}
-    />
-  );
+    <RenderItem item={item} onPress={ () => onHandleModal(item.id)} key={item.id}/>
+  )
 
   const onHandleDeleteItem = (id) => {
     setTasks(tasks.filter((item) => item.id !== id));
     setSelectedTask(null);
     setModalVisible(!modalVisible);
   }
-  console.warn("Tarea", task);
+  //console.warn("Tarea", task);
 
   return (
     <View style={styles.container}>
@@ -105,11 +115,9 @@ export default function App() {
         color='#4A306D'
       
       />
-      <CustomFlatList
-         data={tasks}
-         renderItem={renderItem}
-         keyExtractor={(item) => item.id.toString()}
-         showsVerticalScrollIndicator={false}
+        <CustomFlatList
+        data={tasks}
+        renderItem= {renderItem}
       />
       <CustomModal animationType='slide' visible={modalVisible}>
         <View style={styles.modalContainer}>
